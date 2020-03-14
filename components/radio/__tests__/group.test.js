@@ -170,10 +170,56 @@ describe('Radio Group', () => {
   });
 
   it('passes prefixCls down to radio', () => {
-    const options = [{ label: 'Apple', value: 'Apple' }, { label: 'Orange', value: 'Orange', style: { fontSize: 12 } }];
+    const options = [
+      { label: 'Apple', value: 'Apple' },
+      { label: 'Orange', value: 'Orange', style: { fontSize: 12 } },
+    ];
 
     const wrapper = render(<RadioGroup prefixCls="my-radio" options={options} />);
 
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('defaultValue is used properly', () => {
+    const defaultSelectedValidator = (wrapper, selecteValue) => {
+      const checkedInputs = wrapper.find('input[checked]');
+      expect(checkedInputs.length).toEqual(1);
+      expect(checkedInputs[0].attribs['value']).toEqual(selecteValue);
+    };
+
+    it(`when value is not passed`, () => {
+      const defaultValue = 'A';
+      const wrapper = render(
+        createRadioGroup({
+          defaultValue,
+        }),
+      );
+
+      defaultSelectedValidator(wrapper, defaultValue);
+    });
+
+    it(`when value is passed with null`, () => {
+      const defaultValue = 'B';
+      const wrapper = render(
+        createRadioGroup({
+          defaultValue,
+          value: null,
+        }),
+      );
+
+      defaultSelectedValidator(wrapper, defaultValue);
+    });
+
+    it(`when value is passed with undefined`, () => {
+      const defaultValue = 'C';
+      const wrapper = render(
+        createRadioGroup({
+          defaultValue,
+          value: undefined,
+        }),
+      );
+
+      defaultSelectedValidator(wrapper, defaultValue);
+    });
   });
 });

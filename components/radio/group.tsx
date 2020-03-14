@@ -29,7 +29,7 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
   };
 
   static getDerivedStateFromProps(nextProps: RadioGroupProps) {
-    if ('value' in nextProps) {
+    if ('value' in nextProps && nextProps.value !== null && nextProps.value !== undefined) {
       return {
         value: nextProps.value,
       };
@@ -47,7 +47,7 @@ class RadioGroup extends React.PureComponent<RadioGroupProps, RadioGroupState> {
   constructor(props: RadioGroupProps) {
     super(props);
     let value;
-    if ('value' in props) {
+    if ('value' in props && props.value !== null && props.value !== undefined) {
       value = props.value;
     } else if ('defaultValue' in props) {
       value = props.defaultValue;

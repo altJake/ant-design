@@ -181,10 +181,10 @@ describe('Radio Group', () => {
   });
 
   describe('defaultValue is used properly', () => {
-    const defaultSelectedValidator = (wrapper, selecteValue) => {
+    const defaultSelectedValidator = (wrapper, selectedValue) => {
       const checkedInputs = wrapper.find('input[checked]');
       expect(checkedInputs.length).toEqual(1);
-      expect(checkedInputs[0].attribs['value']).toEqual(selecteValue);
+      expect(checkedInputs[0].attribs.value).toEqual(selectedValue);
     };
 
     it(`when value is not passed`, () => {
